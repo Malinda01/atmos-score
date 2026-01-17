@@ -5,6 +5,7 @@ const axios = require("axios");
 const cities = require("./cities.json"); // Importing your local file
 
 dotenv.config();
+console.log("DEBUG: Key is ->", process.env.OPENWEATHER_API_KEY); // Add this
 
 const app = express();
 const PORT = process.env.PORT || 5000;
