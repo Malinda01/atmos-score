@@ -14,7 +14,7 @@ const fetchRawData = async (cityCode) => {
   // 2. If missing, hit API
   try {
     const res = await axios.get(
-      `https://api.openweathermap.org/data/2.5/weather?id=${cityCode}&appid=${process.env.OPENWEATHER_API_KEY}&units=metric`
+      `https://api.openweathermap.org/data/2.5/weather?id=${cityCode}&appid=${process.env.OPENWEATHER_API_KEY}&units=metric`,
     );
     // 3. Save to Raw Cache
     cache.set(RAW_KEY, res.data);
@@ -34,18 +34,26 @@ const fetchWeatherForCities = async () => {
     return { data: cachedDashboard, fromCache: true };
   }
 
-  // --- LAYER 2: Process Data (Using Raw Cache internal helper) ---
-  const promises = cities.List.map(async (city) => {
-    const rawData = await fetchRawData(city.CityCode);
+  // --- STEP 1: Extract City Codes into an Array (As per Assignment) ---
+  const cityCodes = cities.List.map((city) => city.CityCode);
+
+  // --- LAYER 2: Process Data using the cityCodes array ---
+  const promises = cityCodes.map(async (code) => {
+    // Fetch data using the extracted code
+    const rawData = await fetchRawData(code);
 
     if (!rawData) return null;
+
+    // Retrieve the original City Name from the JSON file to ensure consistency
+    // (Since we are now iterating over IDs, we must look up the name object)
+    const originalCity = cities.List.find((c) => c.CityCode === code);
 
     const { temp, humidity } = rawData.main;
     const windSpeed = rawData.wind.speed;
 
     return {
-      id: city.CityCode,
-      name: city.CityName,
+      id: code,
+      name: originalCity ? originalCity.CityName : rawData.name, // Use JSON name, fallback to API name
       temp: Math.round(temp),
       humidity,
       windSpeed,
