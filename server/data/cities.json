@@ -1,6 +1,6 @@
  {"List":
  [{"CityCode":"1248991","CityName":"Colombo"},
- {"CityCode":"1248991","CityName":"Mumbai"},
+ {"CityCode":"1275339","CityName":"Mumbai"},
  {"CityCode":"1850147","CityName":"Tokyo"},
  {"CityCode":"2644210","CityName":"Liverpool"},
  {"CityCode":"2988507","CityName":"Paris"},
@@ -12,5 +12,5 @@
  {"CityCode":"1242833","CityName":"Jaffna"},
  {"CityCode":"1232783","CityName":"Nuwara Eliya"},
  {"CityCode":"1246294","CityName":"Galle"},
- {"CityCode":"1241622","CityName":"Chicago"},
+ {"CityCode":"4887398","CityName":"Chicago"},
  {"CityCode":"1228730","CityName":"Rathnapura"}]}
