@@ -11,7 +11,7 @@ const Header = ({ lastUpdated, onRefresh, loading }) => {
   return (
     <header className="mb-8 flex flex-col md:flex-row justify-between items-center bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md transition-colors duration-300">
       <div>
-        <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent">
+        <h1 className="text-3xl font-bold bg-linear-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent">
           Atmos Score Dashboard
         </h1>
         <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
@@ -23,7 +23,7 @@ const Header = ({ lastUpdated, onRefresh, loading }) => {
         {/* Dark mode begin */}
         <button
           onClick={toggleTheme}
-          className="p-2 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+          className="p-2 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
           aria-label="Toggle Dark Mode"
         >
           {theme === "dark" ? "☀️" : "🌙"}
