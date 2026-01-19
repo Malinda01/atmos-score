@@ -1,16 +1,32 @@
+import { useTheme } from "../context/ThemeContext";
+
 const Header = ({ lastUpdated, onRefresh, loading }) => {
+  const { theme, setTheme } = useTheme();
+
+  const toggleTheme = () => {
+    setTheme((prev) => (prev === "dark" ? "light" : "dark"));
+  };
+
   return (
-    <header className="mb-10 flex flex-col md:flex-row justify-between items-center bg-white p-7 rounded-xl shadow-md">
+    <header className="mb-8 flex flex-col md:flex-row justify-between items-center bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md transition-colors duration-300">
       <div>
         <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent">
-          Atmos Score
+          Atmos Score Dashboard
         </h1>
-        <p className="text-sm text-gray-500 mt-1">
+        <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
           Weather Analytics & Comfort Index
         </p>
       </div>
 
       <div className="mt-4 md:mt-0 flex items-center gap-4">
+        <button
+          onClick={toggleTheme}
+          className="p-2 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+          aria-label="Toggle Dark Mode"
+        >
+          {theme === "dark" ? "☀️" : "🌙"}
+        </button>
+
         {lastUpdated && (
           <span className="text-xs text-gray-400">
             Last updated: {lastUpdated}
@@ -21,7 +37,7 @@ const Header = ({ lastUpdated, onRefresh, loading }) => {
           className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-medium transition-all cursor-pointer disabled:opacity-50"
           disabled={loading}
         >
-          {loading ? "Refreshing..." : "Refresh Data"}
+          {loading ? "..." : "Refresh"}
         </button>
       </div>
     </header>

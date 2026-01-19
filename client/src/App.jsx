@@ -1,15 +1,16 @@
 import "./App.css";
 import { useWeather } from "./hooks/useWeather";
+import { ThemeProvider } from "./context/ThemeContext";
 import Header from "./components/Header";
 import WeatherCard from "./components/WeatherCard";
 import { LoadingSpinner, ErrorMessage } from "./components/States";
 
-function App() {
+function AppContent() {
   const { weatherData, loading, error, lastUpdated, fetchWeather } =
     useWeather();
 
   return (
-    <div className="min-h-screen bg-gray-100 text-gray-800 p-4 transition-colors duration-300">
+    <div className="min-h-screen bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-100 p-4 transition-colors duration-300">
       <div className="max-w-7xl mx-auto">
         <Header
           lastUpdated={lastUpdated}
@@ -30,6 +31,14 @@ function App() {
         )}
       </div>
     </div>
+  );
+}
+
+function App() {
+  return (
+    <ThemeProvider>
+      <AppContent />
+    </ThemeProvider>
   );
 }
 
