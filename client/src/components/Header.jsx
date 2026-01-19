@@ -3,6 +3,7 @@ import { useTheme } from "../context/ThemeContext";
 const Header = ({ lastUpdated, onRefresh, loading }) => {
   const { theme, setTheme } = useTheme();
 
+  // Toggle theme
   const toggleTheme = () => {
     setTheme((prev) => (prev === "dark" ? "light" : "dark"));
   };
@@ -19,6 +20,7 @@ const Header = ({ lastUpdated, onRefresh, loading }) => {
       </div>
 
       <div className="mt-4 md:mt-0 flex items-center gap-4">
+        {/* Dark mode begin */}
         <button
           onClick={toggleTheme}
           className="p-2 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
@@ -26,6 +28,7 @@ const Header = ({ lastUpdated, onRefresh, loading }) => {
         >
           {theme === "dark" ? "☀️" : "🌙"}
         </button>
+        {/* Dark mode end */}
 
         {lastUpdated && (
           <span className="text-xs text-gray-400">
