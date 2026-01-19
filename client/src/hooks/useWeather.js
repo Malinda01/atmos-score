@@ -1,13 +1,17 @@
 import { useState, useEffect, useCallback } from "react";
 import axios from "axios";
+import { useAuth0 } from "@auth0/auth0-react"; // Import Auth0
 
 export const useWeather = () => {
+  const { getAccessTokenSilently, isAuthenticated } = useAuth0(); // Get Auth0 tools
   const [weatherData, setWeatherData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [lastUpdated, setLastUpdated] = useState(null);
 
   const fetchWeather = useCallback(async () => {
+    if (!isAuthenticated) return; // Don't fetch if not logged in
+
     try {
       setLoading(true);
       setError(null);

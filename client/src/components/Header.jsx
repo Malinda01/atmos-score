@@ -1,3 +1,4 @@
+import { LogoutButton } from "./AuthButtons";
 import { useTheme } from "../context/ThemeContext";
 
 const Header = ({ lastUpdated, onRefresh, loading }) => {
@@ -29,12 +30,12 @@ const Header = ({ lastUpdated, onRefresh, loading }) => {
           {theme === "dark" ? "☀️" : "🌙"}
         </button>
         {/* Dark mode end */}
-
         {lastUpdated && (
           <span className="text-xs text-gray-400">
             Last updated: {lastUpdated}
           </span>
         )}
+        <LogoutButton /> {/* <--- Add this here */}
         <button
           onClick={onRefresh}
           className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-medium transition-all cursor-pointer disabled:opacity-50"
