@@ -1,7 +1,9 @@
 const express = require("express");
 const cors = require("cors");
 const weatherRoutes = require("./routes/weather.routes");
+const dotenv = require("dotenv");
 
+dotenv.config();
 const app = express();
 
 // UPDATE THIS BLOCK
