@@ -16,14 +16,22 @@ export const useWeather = () => {
       setLoading(true);
       setError(null);
       // Ensure your server is running on port 5000
-      const response = await axios.get("http://localhost:5000/api/weather");
+      const response = await axios.get("http://localhost:5000/api/weather", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
 
+      // --- CHANGE START ---
       if (response.data.success) {
         setWeatherData(response.data.data);
         setLastUpdated(new Date().toLocaleTimeString());
       } else {
-        setError("Failed to load weather data");
+        // Catch silent backend errors (e.g. 500 Internal Server Error returned as JSON)
+        console.error("Backend Error:", response.data.message);
+        setError(
+          response.data.message || "Server returned unsuccessful response",
+        );
       }
+      // --- CHANGE END ---
     } catch (err) {
       console.error(err);
       setError(
