@@ -7,7 +7,7 @@ const {
 const router = express.Router();
 const checkJwt = require("../middleware/auth"); // Import middleware
 
-router.get("/", getWeatherData);
+// router.get("/", getWeatherData);
 router.get("/status", getCacheStatus); // New Debug Route
 router.get("/", checkJwt, getWeatherData);
 
