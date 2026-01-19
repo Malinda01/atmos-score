@@ -7,6 +7,7 @@ import WeatherCard from "./components/WeatherCard";
 import Filters from "./components/Filters"; // <--- Import Filters
 import { LoginButton } from "./components/AuthButtons";
 import { LoadingSpinner, ErrorMessage } from "./components/States";
+import LoginScreen from "./components/LoginScreen";
 import "./App.css";
 
 function AppContent() {
@@ -52,16 +53,7 @@ function AppContent() {
   if (isLoading) return <LoadingSpinner />;
 
   if (!isAuthenticated) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900 transition-colors">
-        <div className="text-center pt-20">
-          <h1 className="fixed top-35 left-0 w-full text-4xl font-bold p-4 text-center bg-white dark:bg-gray-900 dark:text-white z-50">
-            Atmos Score
-          </h1>
-          <LoginButton />
-        </div>
-      </div>
-    );
+    return <LoginScreen />;
   }
 
   return (
