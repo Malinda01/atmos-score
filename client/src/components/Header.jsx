@@ -1,6 +1,6 @@
 const Header = ({ lastUpdated, onRefresh, loading }) => {
   return (
-    <header className="mb-8 flex flex-col md:flex-row justify-between items-center bg-white p-6 rounded-xl shadow-md">
+    <header className="mb-10 flex flex-col md:flex-row justify-between items-center bg-white p-7 rounded-xl shadow-md">
       <div>
         <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent">
           Atmos Score
