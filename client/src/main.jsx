@@ -7,11 +7,11 @@ import App from "./App.jsx";
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <Auth0Provider
-      domain="dev-1h6gvgpwk6620grd.us.auth0.com" // Paste from Auth0
-      clientId="JYsVhDPRNoHoBguvd8N2gl0SdKqBmRcQ" // Paste from Auth0
+      domain="dev-1h6gvgpwk6620grd.us.auth0.com" // From App Settings
+      clientId="0yU3X4B7daCLPqlcT9JWjho0ybuDlAnx" // From App Settings
       authorizationParams={{
         redirect_uri: "http://localhost:5173",
-        audience: "https://weather-api/", // Paste from Auth0 API
+        audience: "https://atmos-api", // From API Settings
       }}
     >
       <App />

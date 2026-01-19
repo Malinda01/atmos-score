@@ -5,9 +5,9 @@ export const LoginButton = () => {
   return (
     <button
       onClick={() => loginWithRedirect()}
-      className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg transition-all shadow-lg hover:shadow-xl"
+      className="px-6 py-3 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 transition"
     >
-      Log In with Auth0
+      Log In
     </button>
   );
 };
@@ -19,7 +19,7 @@ export const LogoutButton = () => {
       onClick={() =>
         logout({ logoutParams: { returnTo: window.location.origin } })
       }
-      className="px-4 py-2 bg-red-500 hover:bg-red-600 text-white text-sm font-medium rounded-lg transition-colors"
+      className="px-4 py-2 bg-red-500 hover:bg-red-600 text-white text-sm rounded-lg"
     >
       Log Out
     </button>

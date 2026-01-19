@@ -1,53 +1,49 @@
 import { useState, useEffect, useCallback } from "react";
 import axios from "axios";
-import { useAuth0 } from "@auth0/auth0-react"; // Import Auth0
+import { useAuth0 } from "@auth0/auth0-react";
 
 export const useWeather = () => {
-  const { getAccessTokenSilently, isAuthenticated } = useAuth0(); // Get Auth0 tools
+  const { getAccessTokenSilently, isAuthenticated } = useAuth0();
   const [weatherData, setWeatherData] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false); // Start false, wait for auth
   const [error, setError] = useState(null);
   const [lastUpdated, setLastUpdated] = useState(null);
 
   const fetchWeather = useCallback(async () => {
-    if (!isAuthenticated) return; // Don't fetch if not logged in
+    if (!isAuthenticated) return;
 
     try {
       setLoading(true);
       setError(null);
-      // Ensure your server is running on port 5000
+
+      // 1. Get Token
+      const token = await getAccessTokenSilently();
+
+      // 2. Send Token
       const response = await axios.get("http://localhost:5000/api/weather", {
-        headers: { Authorization: `Bearer ${token}` },
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       });
 
-      // --- CHANGE START ---
       if (response.data.success) {
         setWeatherData(response.data.data);
         setLastUpdated(new Date().toLocaleTimeString());
-      } else {
-        // Catch silent backend errors (e.g. 500 Internal Server Error returned as JSON)
-        console.error("Backend Error:", response.data.message);
-        setError(
-          response.data.message || "Server returned unsuccessful response",
-        );
       }
-      // --- CHANGE END ---
     } catch (err) {
-      console.error(err);
-      setError(
-        "Error connecting to server. Ensure backend is running on port 5000.",
-      );
+      console.error("Fetch error:", err);
+      setError("Failed to fetch data. Ensure you are logged in.");
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [isAuthenticated, getAccessTokenSilently]);
 
+  // Trigger fetch when user logs in
   useEffect(() => {
-    fetchWeather();
-    // Auto-refresh every 5 minutes
-    const interval = setInterval(fetchWeather, 300000);
-    return () => clearInterval(interval);
-  }, [fetchWeather]);
+    if (isAuthenticated) {
+      fetchWeather();
+    }
+  }, [isAuthenticated, fetchWeather]);
 
   return { weatherData, loading, error, lastUpdated, fetchWeather };
 };
