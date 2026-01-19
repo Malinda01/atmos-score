@@ -3,7 +3,7 @@ const Header = ({ lastUpdated, onRefresh, loading }) => {
     <header className="mb-8 flex flex-col md:flex-row justify-between items-center bg-white p-6 rounded-xl shadow-md">
       <div>
         <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent">
-          Atmos Score Dashboard
+          Atmos Score
         </h1>
         <p className="text-sm text-gray-500 mt-1">
           Weather Analytics & Comfort Index
