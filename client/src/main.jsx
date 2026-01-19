@@ -10,7 +10,7 @@ createRoot(document.getElementById("root")).render(
       domain="dev-1h6gvgpwk6620grd.us.auth0.com" // Paste from Auth0
       clientId="JYsVhDPRNoHoBguvd8N2gl0SdKqBmRcQ" // Paste from Auth0
       authorizationParams={{
-        redirect_uri: window.location.origin,
+        redirect_uri: "http://localhost:5173",
         audience: "https://weather-api/", // Paste from Auth0 API
       }}
     >
