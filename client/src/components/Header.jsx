@@ -1,8 +1,10 @@
 import { LogoutButton } from "./AuthButtons";
+import { useAuth0 } from "@auth0/auth0-react";
 import { useTheme } from "../context/ThemeContext";
 
 const Header = ({ lastUpdated, onRefresh, loading }) => {
   const { theme, setTheme } = useTheme();
+  const { user, isAuthenticated } = useAuth0();
 
   // Toggle theme
   const toggleTheme = () => {
@@ -21,6 +23,25 @@ const Header = ({ lastUpdated, onRefresh, loading }) => {
       </div>
 
       <div className="mt-4 md:mt-0 flex items-center gap-4">
+        {/* --- NEW: User Profile Section --- */}
+        {isAuthenticated && user && (
+          <div className="flex items-center gap-3 pr-4 border-r border-gray-200 dark:border-gray-700">
+            <img
+              src={user.picture}
+              alt={user.name}
+              className="w-10 h-10 rounded-full border-2 border-blue-100 dark:border-gray-600"
+            />
+            <div className="hidden sm:block text-right">
+              <p className="text-sm font-bold text-gray-700 dark:text-gray-200 leading-tight">
+                {user.nickname || user.name}
+              </p>
+              <p className="text-xs text-gray-500 dark:text-gray-400">
+                {user.email}
+              </p>
+            </div>
+          </div>
+        )}
+        {/* -------------------------------- */}
         {/* Dark mode begin */}
         <button
           onClick={toggleTheme}
