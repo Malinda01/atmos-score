@@ -8,7 +8,7 @@ const getWeatherData = async (req, res) => {
 
     res.json({
       success: true,
-      cached: fromCache,
+      cached: fromCache, // true = HIT, false = miss
       data: data,
     });
   } catch (err) {
@@ -17,11 +17,10 @@ const getWeatherData = async (req, res) => {
   }
 };
 
-// New: Debug Endpoint Handler
 const getCacheStatus = (req, res) => {
   res.json({
     status: "Active",
-    stats: cache.getStats(),
+    stats: cache.getStats(), // Global hits or miss counts
     keys: cache.keys(), // Lists what is currently in memory
   });
 };

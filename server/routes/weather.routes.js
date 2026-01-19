@@ -6,9 +6,9 @@ const {
 const router = express.Router();
 const checkJwt = require("../middleware/auth");
 
+// Debug route
 router.get("/status", getCacheStatus);
 
-// ONLY keep the protected route
 router.get("/", checkJwt, getWeatherData);
 
 module.exports = router;
