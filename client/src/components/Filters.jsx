@@ -34,18 +34,49 @@ const Filters = ({ searchQuery, setSearchQuery, sortBy, setSortBy }) => {
         <label className="text-sm font-medium text-gray-500 dark:text-gray-400 whitespace-nowrap">
           Sort by:
         </label>
-        <select
-          value={sortBy}
-          onChange={(e) => setSortBy(e.target.value)}
-          className="w-full sm:w-48 p-2 rounded-lg border border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer"
-        >
-          <option value="default">Default (Rank)</option>
-          <option value="name">Name (A-Z)</option>
-          <option value="score_desc">Comfort Score (High to Low)</option>
-          <option value="score_asc">Comfort Score (Low to High)</option>
-          <option value="temp_desc">Temperature (Hot First)</option>
-          <option value="temp_asc">Temperature (Cold First)</option>
-        </select>
+
+        {/* 1. Relative wrapper to position the icon */}
+        <div className="relative w-full sm:w-48">
+          {/* 2. The Select Element */}
+          <select
+            value={sortBy}
+            onChange={(e) => setSortBy(e.target.value)}
+            className="
+                appearance-none 
+                w-full 
+                pl-7 pr-3 py-2 
+                rounded-lg 
+                border border-gray-200 dark:border-gray-600 
+                bg-gray-50 dark:bg-gray-700 
+                text-gray-800 dark:text-gray-100 
+                focus:outline-none focus:ring-2 focus:ring-blue-500 
+                cursor-pointer"
+          >
+            <option value="default">Default (Rank)</option>
+            <option value="name">Name (A-Z)</option>
+            <option value="score_desc">Comfort Score (High to Low)</option>
+            <option value="score_asc">Comfort Score (Low to High)</option>
+            <option value="temp_desc">Temperature (Hot First)</option>
+            <option value="temp_asc">Temperature (Cold First)</option>
+          </select>
+
+          {/* 3. The Custom Arrow Icon (Positioned Left) */}
+          <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-2.5">
+            <svg
+              className="h-4 w-4 text-gray-500 dark:text-gray-400"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                fillRule="evenodd"
+                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                clipRule="evenodd"
+              />
+            </svg>
+          </div>
+        </div>
       </div>
     </div>
   );
