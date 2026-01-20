@@ -6,7 +6,6 @@ const dotenv = require("dotenv");
 dotenv.config();
 const app = express();
 
-// UPDATE THIS BLOCK
 app.use(
   cors({
     origin: "http://localhost:5173",
