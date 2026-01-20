@@ -16,7 +16,7 @@ A full-stack weather analytics application that retrieves real-time weather data
 1. **Clone the repository**
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/Malinda01/atmos-score
 cd atmos-score
 
 ```
