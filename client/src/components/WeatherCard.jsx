@@ -1,4 +1,4 @@
-import { AreaChart, Area, Tooltip, ResponsiveContainer } from "recharts"; // Import Recharts
+import { AreaChart, Area, Tooltip, ResponsiveContainer } from "recharts";
 
 const WeatherCard = ({ city }) => {
   const getScoreColor = (score) => {
@@ -64,7 +64,7 @@ const WeatherCard = ({ city }) => {
         </div>
       </div>
 
-      {/* --- NEW: Temperature Trend Graph --- */}
+      {/* Temp trend Graph */}
       {city.trend && (
         <div className="h-24 w-full mt-auto mb-2">
           <div className="text-[10px] text-gray-400 px-6 mb-1 uppercase tracking-wide">

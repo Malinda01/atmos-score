@@ -10,6 +10,7 @@ const fetchRawData = async (cityCode) => {
 
   // 2. Check Raw Cache
   const cachedRaw = cache.get(RAW_KEY);
+  // If found return cached data
   if (cachedRaw) return cachedRaw;
 
   // 3. If missing, hit API (Using /forecast instead of /weather)
@@ -68,7 +69,7 @@ const fetchWeatherForCities = async () => {
       windSpeed,
       condition: current.weather[0].main,
       score: calculateComfortIndex(temp, humidity, windSpeed),
-      trend: trend, // <--- Attach trend data here
+      trend: trend,
     };
   });
 
