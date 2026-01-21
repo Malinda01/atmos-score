@@ -2,9 +2,9 @@ import React from "react";
 
 const Filters = ({ searchQuery, setSearchQuery, sortBy, setSortBy }) => {
   return (
-    <div className="mb-6 flex flex-col sm:flex-row gap-4 justify-between items-center bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700">
+    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 w-full mb-6 p-4 bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700">
       {/* Search Input */}
-      <div className="relative w-full sm:w-1/2">
+      <div className="relative w-full sm:flex-1">
         <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
           <svg
             className="h-5 w-5 text-gray-400"
@@ -30,27 +30,16 @@ const Filters = ({ searchQuery, setSearchQuery, sortBy, setSortBy }) => {
       </div>
 
       {/* Sort Dropdown */}
-      <div className="flex items-center gap-2 w-full sm:w-auto">
+      <div className="flex items-center gap-2 w-full sm:w-auto mt-2 sm:mt-0">
         <label className="text-sm font-medium text-gray-500 dark:text-gray-400 whitespace-nowrap">
           Sort by:
         </label>
 
-        {/* 1. Relative wrapper to position the icon */}
-        <div className="relative w-full sm:w-48">
-          {/* 2. The Select Element */}
+        <div className="relative w-full sm:w-auto">
           <select
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value)}
-            className="
-                appearance-none 
-                w-full 
-                pl-7 pr-3 py-2 
-                rounded-lg 
-                border border-gray-200 dark:border-gray-600 
-                bg-gray-50 dark:bg-gray-700 
-                text-gray-800 dark:text-gray-100 
-                focus:outline-none focus:ring-2 focus:ring-blue-500 
-                cursor-pointer"
+            className="appearance-none w-full sm:w-auto pl-7 pr-3 py-2 rounded-lg border border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer"
           >
             <option value="default">Default (Rank)</option>
             <option value="name">Name (A-Z)</option>
@@ -60,7 +49,6 @@ const Filters = ({ searchQuery, setSearchQuery, sortBy, setSortBy }) => {
             <option value="temp_asc">Temperature (Cold First)</option>
           </select>
 
-          {/* 3. The Custom Arrow Icon (Positioned Left) */}
           <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-2.5">
             <svg
               className="h-4 w-4 text-gray-500 dark:text-gray-400"
