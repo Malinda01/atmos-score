@@ -114,33 +114,36 @@ The weights were chosen to prioritize human thermal regulation and physical comf
 
 ## 4. Trade-offs Considered
 
-- **In-Memory Caching (Node-Cache) vs. Redis:**
-- _Decision:_ Used `node-cache` (in-memory).
-- _Trade-off:_ While Redis allows for a distributed cache that survives server restarts, `node-cache` was chosen for simplicity and zero external infrastructure dependencies. The trade-off is that cache data is lost if the server process restarts.
+### Wind factor
 
-- **Auth0 Integration:**
-- _Decision:_ Used Auth0 for authentication.
-- _Trade-off:_ Provides high security and easy setup but introduces a dependency on an external service. Implementing custom JWT auth would have offered more control but significantly higher development time and security risk.
+- **Trade-off:** This formula assumes universal ideal temparature of 22C and treats all wind as negative
+- **Reasoning:** This ignores the cooling effect of wind in hot climate vs wind chill effect on cold climates.
+
+### Independant variables
+
+- **Trade-off:** The variables (Temp, Humid, wind speed) in the formula are calculated independantly and summed.
+- **Reasoning:** In reality, Humidity and temparature interacts exponentially. For a clearer, weight based system that users
+  can easily understand, we traded the accuracy of the interacting variables.
 
 ---
 
 ## 5. Cache Design Explanation
 
-The system implements a **Two-Layer Caching Strategy** to minimize API costs and latency.
+The system implements a **L1 Caching** to minimize API costs and latency.
 
-### Layer 1: Dashboard Cache (Processed)
+### Dashboard Cache (Processed)
 
-- **Key:** `dashboard_processed`
+- **Key:** `dashboard_processed_v2` (v2 - the newset version which ignores prev caches)
 - **Content:** The fully calculated, sorted, and ranked list of cities.
 - **Purpose:** Delivers 0ms response times for the majority of user requests. Bypasses all calculation logic.
 
-### Layer 2: Raw API Cache (Granular)
+### Raw API Cache (Raw)
 
 - **Key:** `raw_{CityID}` (e.g., `raw_1248991`)
 - **Content:** The raw JSON response from OpenWeatherMap.
-- **Purpose:** If the dashboard cache expires, the system rebuilds it. It checks this layer first for each city. If valid data exists here, it avoids hitting the OpenWeatherMap API, preserving the API quota.
+- **Purpose:** If the dashboard cache expires, the system rebuilds it. It checks this first for each city. If valid data exists here, it avoids hitting the OpenWeatherMap API, preserving the API quota.
 
-**TTL (Time-to-Live):** Both layers utilize a **5-minute (300 seconds)** expiration policy to ensure data freshness while adhering to API rate limits.
+**TTL (Time-to-Live):** Both utilize a **5-minute (300 seconds)** expiration policy to ensure data freshness while adhering to API rate limits.
 
 ---
 

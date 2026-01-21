@@ -3,7 +3,7 @@ const cities = require("../data/cities.json");
 const calculateComfortIndex = require("../utils/comfortIndex");
 const cache = require("../utils/cache");
 
-// Helper: Fetch Raw Data (Switch to FORECAST endpoint)
+// Helper: Fetch Raw Data
 const fetchRawData = async (cityCode) => {
   // 1. Change Key to separate forecast cache from old weather cache
   const RAW_KEY = `raw_forecast_${cityCode}`;
