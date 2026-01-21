@@ -5,20 +5,18 @@ const cache = require("../utils/cache");
 
 // Helper: Fetch Raw Data
 const fetchRawData = async (cityCode) => {
-  // 1. Change Key to separate forecast cache from old weather cache
   const RAW_KEY = `raw_forecast_${cityCode}`;
 
-  // 2. Check Raw Cache
   const cachedRaw = cache.get(RAW_KEY);
   // If found return cached data
   if (cachedRaw) return cachedRaw;
 
-  // 3. If missing, hit API (Using /forecast instead of /weather)
+  //If missing, hit API
   try {
     const res = await axios.get(
       `https://api.openweathermap.org/data/2.5/forecast?id=${cityCode}&appid=${process.env.OPENWEATHER_API_KEY}&units=metric`,
     );
-    // 4. Save to Raw Cache
+    //Save to Raw Cache
     cache.set(RAW_KEY, res.data);
     return res.data;
   } catch (error) {
@@ -28,7 +26,7 @@ const fetchRawData = async (cityCode) => {
 };
 
 const fetchWeatherForCities = async () => {
-  // Update dashboard key to force a fresh fetch
+  //dashboard key to force a fresh fetch
   const DASHBOARD_KEY = "dashboard_processed_v2";
 
   const cachedDashboard = cache.get(DASHBOARD_KEY);
@@ -63,7 +61,7 @@ const fetchWeatherForCities = async () => {
 
     return {
       id: code,
-      name: originalCity ? originalCity.CityName : rawData.city.name, // Note: structure changes to rawData.city.name in forecast API
+      name: originalCity ? originalCity.CityName : rawData.city.name,
       temp: Math.round(temp),
       humidity,
       windSpeed,
