@@ -21,11 +21,14 @@ export const useWeather = () => {
       const token = await getAccessTokenSilently();
 
       // 3. SEND THE TOKEN IN THE HEADER
-      const response = await axios.get("http://localhost:5000/api/weather", {
-        headers: {
-          Authorization: `Bearer ${token}`, // <--- The "Key"
+      const response = await axios.get(
+        "http://localhost:5000/api/weather/forecastWeather",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`, // <--- The "Key"
+          },
         },
-      });
+      );
 
       if (response.data.success) {
         setWeatherData(response.data.data);

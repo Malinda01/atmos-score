@@ -9,6 +9,6 @@ const checkJwt = require("../middleware/auth");
 // Debug route
 router.get("/status", getCacheStatus);
 
-router.get("/", checkJwt, getWeatherData);
+router.get("/forecastWeather", checkJwt, getWeatherData);
 
 module.exports = router;
